@@ -4,13 +4,35 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Rajdhani', sans-serif;
-  color: #fff;
-  background: #0b0c10;
-  overflow: hidden;
-  height: 100vh;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  background-size: 400% 400%;
+  animation: gradientBG 20s ease infinite;
+  color: #333;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;   /* ✅ This centers the container vertically & horizontally */
+  align-items: center;
+  overflow-y: auto;           /* ✅ allows scrolling when content overflows */
+  box-sizing: border-box;
+}
+
+.wrapper {
+  width: 90%;
+  max-width: 600px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  position: relative;
+  z-index: 1;
+  margin: 40px 0;            /* ✅ adds spacing on top/bottom for small screens */
+}
+
+@media (max-height: 600px) {
+  .wrapper {
+    margin: 60px 10px;
+    transform: none;          /* ensure it's not forcibly centered off-screen */
+  }
 }
 
 canvas#bg {
