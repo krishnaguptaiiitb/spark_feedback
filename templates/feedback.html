@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPARK Feedback</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <canvas id="bg"></canvas>
+
+  <div class="container">
+    <img src="{{ url_for('static', filename='spark_logo.png') }}" alt="SPARK Logo" class="logo" />
+    <h1 class="title">SPARK Feedback Form</h1>
+
+    <form action="/submit" method="POST" class="feedback-form">
+      <label>Overall Experience</label>
+      <select name="overall_experience" required>
+        <option value="">-- Select --</option>
+        <option>Excellent</option>
+        <option>Good</option>
+        <option>Average</option>
+        <option>Poor</option>
+      </select>
+
+      <label>Difficulty Level</label>
+      <select name="difficulty_level" required>
+        <option value="">-- Select --</option>
+        <option>Easy</option>
+        <option>Moderate</option>
+        <option>Difficult</option>
+      </select>
+
+      <label>Technical Issues Faced</label>
+      <textarea name="technical_issues" placeholder="Mention any issues you faced..." rows="3"></textarea>
+
+      <label>Suggestions for Improvement</label>
+      <textarea name="suggestions" placeholder="Your suggestions..." rows="3"></textarea>
+
+      <button type="submit" class="btn">Submit Feedback</button>
+    </form>
+  </div>
+
+  <script>
+    // Thread-like animation background
+    const canvas = document.getElementById('bg');
+    const ctx = canvas.getContext('2d');
+    function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    resize(); window.addEventListener('resize', resize);
+
+    class Node {
+      constructor(){ this.x=Math.random()*canvas.width; this.y=Math.random()*canvas.height; this.vx=(Math.random()-0.5)*0.4; this.vy=(Math.random()-0.5)*0.4; }
+      move(){ this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>canvas.width)this.vx*=-1; if(this.y<0||this.y>canvas.height)this.vy*=-1; }
+    }
+
+    const nodes = Array.from({length:60},()=>new Node());
+    function animate(){
+      ctx.fillStyle="#0b0c10";
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+      for(let i=0;i<nodes.length;i++){
+        const a=nodes[i];
+        a.move();
+        for(let j=i+1;j<nodes.length;j++){
+          const b=nodes[j];
+          const dx=a.x-b.x,dy=a.y-b.y,dist=Math.sqrt(dx*dx+dy*dy);
+          if(dist<130){ctx.strokeStyle="rgba(255,255,255,0.1)";ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}
+        }
+        ctx.fillStyle="rgba(255,255,255,0.8)";
+        ctx.beginPath();ctx.arc(a.x,a.y,2,0,Math.PI*2);ctx.fill();
+      }
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+</body>
+</html>

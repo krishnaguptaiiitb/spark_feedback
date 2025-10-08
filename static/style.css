@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Rajdhani', sans-serif;
+  color: #fff;
+  background: #0b0c10;
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;   /* ✅ This centers the container vertically & horizontally */
+}
+
+canvas#bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+
+.container {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border-radius: 14px;
+  padding: 30px 40px;
+  width: 90%;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(255,255,255,0.1);
+  margin: auto;
+  z-index: 1;
+}
+
+.logo {
+  width: 100px;
+  filter: drop-shadow(0 0 15px #00ffff);
+  margin-bottom: 10px;
+}
+
+.title {
+  font-family: 'Orbitron', sans-serif;
+  color: #00ffff;
+  margin-bottom: 15px;
+}
+
+.feedback-form label {
+  display: block;
+  text-align: left;
+  margin: 8px 0 4px;
+  font-weight: bold;
+  color: #cceeff;
+}
+
+.feedback-form select,
+.feedback-form textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-family: 'Rajdhani', sans-serif;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  resize: none;
+}
+
+.feedback-form select option {
+  color: #000;
+}
+
+.btn {
+  margin-top: 20px;
+  padding: 10px 25px;
+  background: #00ffff;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #0ff;
+  box-shadow: 0 0 15px #00ffff;
+}
+
+.success {
+  max-width: 420px;
+  color: #cceeff;
+}
+
+.small {
+  font-size: 0.9em;
+  opacity: 0.8;
+}
